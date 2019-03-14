@@ -5,7 +5,7 @@ def get_dividers(num):
     for div in range(- num, num + 1):
         if div != 0:
             if num % div == 0:
-                div_list += [div]   # Заполняем список делителей
+                div_list.append(div)    # Заполняем список делителей
     return div_list
 
 
