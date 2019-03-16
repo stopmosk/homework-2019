@@ -5,11 +5,11 @@ def crypt(offset, text):
     result_text = ''
     for symbol in text:
         ord_s = ord(symbol)
-        if ord_s < 65 or 90 < ord_s < 97 or ord_s > 122:
+        if symbol < 'A' or 'Z' < symbol < 'a' or symbol > 'z':
             result_text += symbol
         else:
-            if 65 <= ord_s <= 90 < ord_s + offset or \
-                    97 <= ord_s <= 122 < ord_s + offset:
+            if 'A' <= symbol <= 'Z' < chr(ord_s + offset) or \
+                    'a' <= symbol <= 'z' < chr(ord_s + offset):
                 result_text += chr(ord_s + offset - 26)
             else:
                 result_text += chr(ord_s + offset)
