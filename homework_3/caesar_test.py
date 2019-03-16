@@ -1,5 +1,5 @@
 import unittest
-from balls_collide import balls_collide
+from caesar_logic import encrypt, decrypt
 
 
 class MyTestCase(unittest.TestCase):
@@ -16,11 +16,24 @@ class MyTestCase(unittest.TestCase):
         self.assertFalse(balls_collide((-5, -5, 2), (-10, -10, 2)))
         self.assertFalse(balls_collide((10.5, -10.5, 1.5), (-2.5, -2.5, 5.5)))
 
+    def test_type(self):
+        self.assertRaises(TypeError, balls_collide, {0, 0, 1}, {2, 2, 1})
+        self.assertRaises(TypeError, balls_collide, (0, 0, 1), {2, 2, 1})
+        self.assertRaises(TypeError, balls_collide, [0, 0, 1], {2, 2, 1})
+        self.assertRaises(TypeError, balls_collide, (0, 0, 1), 0)
+        self.assertRaises(TypeError, balls_collide, 'O', (2, 2, 1))
+
     def test_len(self):
         self.assertRaises(TypeError, balls_collide, (0, 0), (2, 2, 1))
         self.assertRaises(TypeError, balls_collide, (0, 0, 1), (2, 2))
         self.assertRaises(TypeError, balls_collide, (0, 0, 1, 3), (2, 2, 1))
         self.assertRaises(TypeError, balls_collide, (0, 0, 1), (2, 2, 1, 4))
+
+    def test_type_ball_arg(self):
+        self.assertRaises(TypeError, balls_collide, (0, 0, 's'), (2, 2, 1))
+        self.assertRaises(TypeError, balls_collide, (0, 0, 5), (2, 'for', 1))
+        self.assertRaises(TypeError, balls_collide, (0, [0], 5), (2, 2, 1))
+        self.assertRaises(TypeError, balls_collide, (0, 0, 5), (2, 2, '1'))
 
     def test_radius(self):
         self.assertRaises(ValueError, balls_collide, (0, 0, -1), (2, 2, 4))
