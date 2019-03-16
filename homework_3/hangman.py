@@ -6,23 +6,22 @@ word_list = ['пистон', 'крыса', 'багор', 'революционе
 random.seed()
 word = random.choice(word_list)
 attempts = len(word) + 33 // (len(word) + 1)  # Тупая формула, но пусть будет
-letters = set()
+exist_letters = set()
 
 while attempts >= 0:
     if attempts == 0:
         print('Вы проиграли, я выливаю ваше вино в раковину. ', end='')
         print('Загаданное слово было "' + word + '".')
         break
-    print_word(generate_string(word, letters))
+    print_word(generate_string(word, exist_letters))
     print('У вас ' + str(attempts) + ' попыток')
-    let_in = ''
-    while not check_letter(letters, let_in):
-        let_in = input('\n Введите букву: ')
+    choice_letter = ''
+    while not check_letter(exist_letters, choice_letter):
+        choice_letter = input('\n Введите букву: ')
         print()
-    letters.add(let_in.lower())
-    if generate_string(word, letters) == word:
+    exist_letters.add(choice_letter.lower())
+    if generate_string(word, exist_letters) == word:
         print_word(word)
-        print('Вы выиграли!')
+        print('Поздравляем, вы выиграли!')
         break
     attempts -= 1
-

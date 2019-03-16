@@ -1,6 +1,12 @@
 import random
 
 
+def print_word(string):
+    for s in string:
+        print(s + ' ', end='')
+    print()
+
+
 def check_letter(ltr_list, letter):
     if letter == '':
         return False
@@ -22,9 +28,3 @@ def generate_string(string, exist_letters):
     for s in string:
         result += s if s in exist_letters else '_'
     return result
-
-
-def print_word(string):
-    for s in string:
-        print(s + ' ', end='')
-    print()

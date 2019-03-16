@@ -1,6 +1,4 @@
 def crypt(offset, text):
-    if not isinstance(offset, int) or not isinstance(text, str):
-        raise TypeError('Неправильный тип аргументов. Нужны int и str.')
     offset %= 26
     result_text = ''
     for symbol in text:
@@ -22,4 +20,3 @@ def encrypt(offset, text):
 
 def decrypt(offset, text):
     return crypt(26 - offset, text)
-
