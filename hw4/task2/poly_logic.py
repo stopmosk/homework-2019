@@ -5,59 +5,86 @@ def derivative_poly_s(string):
 
 # Функция, отображающая список, содержащий полином, в строку
 def poly_to_str(poly):
-    poly_result = ''
+    poly_s = ''
+
     for addend in poly:
-        power = addend[0]
-        factor = addend[1]
-        if poly_result == '':
-            poly_result += (str(factor))
-        else:
-            poly_result += (' + ' + str(factor))
+        factor, power = addend[1], addend[0]
+        if factor == 0:
+            continue
+        # Далее, если множитель члена не равен нулю
+        if factor > 0:
+            poly_s += '+'
+        if power == 0:
+            poly_s += str(factor)
         if power == 1:
-            poly_result += 'x'
-        elif power > 1:
-            poly_result += 'x^' + str(power)
-    if poly_result == '':
-        poly_result = '0'
-    return poly_result
+            poly_s += str(factor) + 'x'
+        if power > 1:
+            poly_s += str(factor) + 'x^' + str(power)
+
+    if poly_s == '':
+        poly_s = '0'
+    if poly_s[0] == '+':
+        poly_s = poly_s[1:]
+
+    # print('Будем переводить полином в строку: ', end='')
+    # print(poly)
+    # print('Получили строку: ' + poly_s)
+    return poly_s
 
 
 # Функция, считающая производную многочлена (списка)
 def derivative(poly):
     poly_result = []
-    for poly_part in range(len(poly)):
-        power = poly[poly_part][0]
-        factor = poly[poly_part][1]
+    for poly_part in poly:
+        power = poly_part[0]
+        factor = poly_part[1]
         if power != 0:
             poly_result.append([power - 1, factor * power])
+    # print('Посчитали производную от: ', end='')
+    # print(poly)
+    # print('Получили: ', end='')
+    # print(poly_result)
     return poly_result
 
 
 # Функция, конвертирующая строку-многочлен в список
 def str_to_poly(string):
+    if string == '':
+        raise ValueError('Передана пустая строка')
+
     poly_result = []
+    if string.lstrip()[0].isdigit():
+        poly_s = '+' + string.replace(' ', '').rstrip('+') + '+'
+    else:
+        poly_s = string.replace(' ', '').rstrip('+') + '+'
+    # Получили многочлен со знаком '+' или '-' слева и '+' справа
+
+    # Заполняем список членов полинома [степень, множитель]
     buffer = ''
-    for s in string.replace(' ', ''):
-        if (s == '+' or s == '-') and buffer != '':
-            poly_result.append(str_to_part(buffer))
+    for symbol in poly_s:
+        if (symbol == '+' or symbol == '-') and buffer != '':
+            addend = str_to_part(buffer)
+            # Теперь поищем, не было ли уже подобного члена в полиноме
+            # Если был - приведём подобные. Если не было - добавим как новый
+            is_similar = False
+            for i, poly_part in enumerate(poly_result):
+                if poly_part[0] == addend[0]:
+                    poly_result[i] = [poly_part[0], poly_part[1] + addend[1]]
+                    is_similar = True
+                    break
+            if not is_similar:
+                poly_result.append(addend)
             buffer = ''
-        buffer += s
-    addand = str_to_part(buffer)
-    flag = 0
-    for poly_part in poly_result:
-        if [poly_part][0] == addand[0]:
-            poly_result = [poly_part[0], poly_part[1] + addand[1]]
-            flag = 1
-            break
-    if flag == 0:
-        poly_result.append(addand)
+        buffer += symbol
+
     poly_result.sort(reverse=True)
-    # pack_poly(poly_result)
+    # print('Сконвертировали строку: ' + string + ' в список:')
+    # print(poly_result)
     return poly_result
 
 
-# Функция, приводящая подобные члены полинома
-def pack_poly(poly):
+# Функция, упрощающая многочлен (приведение подобных членов)
+def poly_simplify(poly):
     tmp = 1
     poly_result = []
     if len(poly) == 1:

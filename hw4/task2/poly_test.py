@@ -57,7 +57,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_derivative_poly_s(self):
         poly = 'x^2 + x + 1'
-        result = '2x + 1'
+        result = '2x+1'
         self.assertEqual(derivative_poly_s(poly), result)
         poly = 'x^2'
         result = '2x'
@@ -69,13 +69,25 @@ class MyTestCase(unittest.TestCase):
         result = '0'
         self.assertEqual(derivative_poly_s(poly), result)
         poly = '-x^2 + x - 1'
-        result = '-2x + 1'
+        result = '-2x+1'
         self.assertEqual(derivative_poly_s(poly), result)
-        poly = '15х^4'
+        poly = '15x^4'
         result = '60x^3'
         self.assertEqual(derivative_poly_s(poly), result)
-        poly = '15х^4 - 8x^2 + 5 - 10 + 7x'
-        result = '60x^3 - 16x + 7'
+        poly = '15x^4 - 8x^2 + 5 - 10 + 7x'
+        result = '60x^3-16x+7'
+        self.assertEqual(derivative_poly_s(poly), result)
+        poly = '-1x + 8x + 10x - 10x - 8x + 5 + 18 - 18 - 5'
+        result = '-1'
+        self.assertEqual(derivative_poly_s(poly), result)
+        poly = '-2x^2-2x-3'
+        result = '-4x-2'
+        self.assertEqual(derivative_poly_s(poly), result)
+        poly = 'x^2'
+        result = '2x'
+        self.assertEqual(derivative_poly_s(poly), result)
+        poly = '-2x^3'
+        result = '-6x^2'
         self.assertEqual(derivative_poly_s(poly), result)
 
 
