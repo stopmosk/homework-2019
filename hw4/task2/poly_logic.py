@@ -83,27 +83,6 @@ def str_to_poly(string):
     return poly_result
 
 
-# Функция, упрощающая многочлен (приведение подобных членов)
-def poly_simplify(poly):
-    tmp = 1
-    poly_result = []
-    if len(poly) == 1:
-        return poly
-    i = 0
-    while i < len(poly) - 1:
-        if poly[i][0] == poly[i + 1][0]:
-            poly_result.append([poly[i][0], poly[i][1] + poly[i + 1][1]])
-            i += 2
-            tmp = 1
-        else:
-            poly_result.append([poly[i][0], poly[i][1]])
-            i += 1
-            tmp = 0
-    if tmp == 1:
-        poly_result.append([poly[i][0], poly[i][1]])
-    return poly_result
-
-
 # Функция, разбирающая отдельное слагаемое. Возвращает список [power, factor]
 def str_to_part(string):
     pos = string.find('x')
