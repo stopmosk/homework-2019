@@ -1,12 +1,11 @@
-import random
-
-
+# Функция, печатающая строку с пробелами между буквами
 def print_word(string):
     for s in string:
         print(s + ' ', end='')
     print()
 
 
+# Функция для проверки введённой буквы на соответствие
 def check_letter(ltr_list, letter):
     if letter == '':
         return False
@@ -23,6 +22,7 @@ def check_letter(ltr_list, letter):
     return True
 
 
+# Функция, генерирующая табло по слову и уже известным буквам
 def generate_string(string, exist_letters):
     result = ''
     for s in string:

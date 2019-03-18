@@ -1,5 +1,5 @@
 import unittest
-from hangman_logic import check_letter, generate_string
+from hangman_logic import generate_string
 
 
 class MyTestCase(unittest.TestCase):

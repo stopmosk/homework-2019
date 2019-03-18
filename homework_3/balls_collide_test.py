@@ -26,7 +26,8 @@ class MyTestCase(unittest.TestCase):
         self.assertRaises(ValueError, balls_collide, (0, 0, -1), (2, 2, 4))
         self.assertRaises(ValueError, balls_collide, (0, 0, 1), (2, 2, -2))
         self.assertRaises(ValueError, balls_collide, (0, 0, -4), (2, 2, -1))
-        self.assertRaises(ValueError, balls_collide, (0, 0, -4.0), (2, 2, -1.0))
+        self.assertRaises(ValueError, balls_collide, (0, 0, -4.0), (2, 2, -1))
+        self.assertRaises(ValueError, balls_collide, (0, 0, -4), (2, 2, -1.0))
 
 
 if __name__ == '__main__':
