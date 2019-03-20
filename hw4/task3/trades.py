@@ -9,6 +9,8 @@ max_gap, max_qty, max_sum = max_qty_gap(db)
 print(max_gap, max_qty, max_sum, sep='\t\t\t\t')
 print('**********************************************************')
 print()
+# db_max = db[max_gap]
+# print(db_max)
 
 print('****** ОКНА С МАКСИМАЛЬНЫМ КОЛИЧЕСТВОМ СДЕЛОК ПО БИРЖАМ ******')
 for ex in ex_list:

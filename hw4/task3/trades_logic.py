@@ -1,5 +1,6 @@
 def database_read(filename):
-    # Считывает базу данных из файла. В каждом окне транзакции суммируются по каждой фирме.
+    # Считывает базу данных из файла
+    # В каждом окне транзакции суммируются по каждой фирме
     db = dict()
     ex_list = set()
     with open(filename, 'r') as trades_file:
@@ -19,11 +20,12 @@ def database_read(filename):
                     ex_list.add(exchange)
             else:
                 db[gap] = {exchange: [1, ex_sum]}
+                ex_list.add(exchange)
     return db, ex_list
 
 
 def max_qty_gap_ex(db, ex):
-    # Возвращает окно с максимальным кол-вом сделок для биржи ex.
+    # Возвращает окно с максимальным кол-вом сделок для биржи ex
     max_gap, max_qty, max_sum = '', 0, 0
     for gap in db:
         test_ex = db[gap].get(ex)
@@ -36,7 +38,7 @@ def max_qty_gap_ex(db, ex):
 
 
 def max_qty_gap(db):
-    # Возвращает окно с максимальным кол-вом сделок для всей базы данных.
+    # Возвращает окно с максимальным кол-вом сделок для всей базы данных
     max_gap, max_qty, max_sum = '', 0, 0
     for gap in db:
         s_qty, s_sum = 0, 0
