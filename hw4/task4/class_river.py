@@ -71,4 +71,6 @@ class River:
 
     def release_cell(self, position):
         self.check_pos(position)
+        if self.storage[position] is None:
+            raise RuntimeError('Вы пытаетесь освободить и так пустую ячейку')
         self.storage[position] = None

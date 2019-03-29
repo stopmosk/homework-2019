@@ -71,6 +71,21 @@ class MyTestCase(unittest.TestCase):
 
         del my_river
 
+    def test_release_cell(self):
+        my_river = River(5)
+
+        my_river.storage = [None, 66, None, None, 77]
+        self.assertRaises(ValueError, my_river.release_cell, -1)
+        self.assertRaises(ValueError, my_river.release_cell, 5)
+        self.assertRaises(RuntimeError, my_river.release_cell, 2)
+
+        my_river.release_cell(1)
+        self.assertTrue(my_river.storage[1] is None)
+        my_river.release_cell(4)
+        self.assertTrue(my_river.storage[4] is None)
+
+        del my_river
+
 
 if __name__ == '__main__':
     unittest.main()
