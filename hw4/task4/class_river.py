@@ -50,6 +50,8 @@ class River:
 
     def place_new_object(self, obj, position):
         self.check_pos(position)
+        if obj is None:
+            raise RuntimeError('Объект не должен быть "None"')
         if self.storage[position] is not None:
             raise RuntimeError('Данная ячейка занята')
         self.storage[position] = obj
@@ -58,10 +60,10 @@ class River:
         # Перемещает объект в реке
         self.check_pos(position)
         self.check_pos(new_pos)
-        if position == new_pos:
-            return
         if self.storage[position] is None:
             raise RuntimeError('Вы пытаетесь переместить пустое место')
+        if position == new_pos:
+            return
         if self.storage[new_pos] is not None:
             raise RuntimeError('Невозможно переместить в занятую ячейку')
         self.storage[new_pos], self.storage[position] = \

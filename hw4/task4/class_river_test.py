@@ -28,5 +28,49 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(my_river.get_next_object(5), (None, -1))
         self.assertEqual(my_river.get_next_object(6), (None, -1))
 
+        del my_river
+
+    def test_place_new_object(self):
+        my_river = River(5)
+
+        my_river.storage = [None, 66, None, None, 77]
+        self.assertRaises(ValueError, my_river.place_new_object, 'SS', -1)
+        self.assertRaises(ValueError, my_river.place_new_object, 'SS', 5)
+        self.assertRaises(RuntimeError, my_river.place_new_object, None, 0)
+        self.assertRaises(RuntimeError, my_river.place_new_object, 'SS', 1)
+        self.assertRaises(RuntimeError, my_river.place_new_object, 'SS', 4)
+
+        my_river.place_new_object('SS', 2)
+        self.assertTrue(my_river.storage[2] == 'SS')
+        my_river.place_new_object('TT', 0)
+        self.assertTrue(my_river.storage[0] == 'TT')
+
+        del my_river
+
+    def test_move_object(self):
+        my_river = River(5)
+
+        my_river.storage = [None, 66, None, None, 77]
+        self.assertRaises(ValueError, my_river.move_object, 1, -1)
+        self.assertRaises(ValueError, my_river.move_object, 1, 5)
+        self.assertRaises(RuntimeError, my_river.move_object, 0, 2)
+        self.assertRaises(RuntimeError, my_river.move_object, 2, 2)
+        self.assertRaises(RuntimeError, my_river.move_object, 1, 4)
+        self.assertRaises(RuntimeError, my_river.move_object, 4, 1)
+        self.assertRaises(RuntimeError, my_river.move_object, 3, 1)
+
+        my_river.move_object(1, 2)
+        self.assertTrue(my_river.storage[1] is None)
+        self.assertTrue(my_river.storage[2] == 66)
+        my_river.move_object(2, 3)
+        self.assertTrue(my_river.storage[2] is None)
+        self.assertTrue(my_river.storage[3] == 66)
+        my_river.move_object(4, 2)
+        self.assertTrue(my_river.storage[4] is None)
+        self.assertTrue(my_river.storage[2] == 77)
+
+        del my_river
+
+
 if __name__ == '__main__':
     unittest.main()
