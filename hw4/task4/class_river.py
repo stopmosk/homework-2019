@@ -5,7 +5,7 @@ class River:
 
     def __init__(self, length):
         random.seed()
-        if length == 0:
+        if length <= 0:
             raise ValueError('Длина реки должна быть больше нуля')
         self.storage = [None] * length
 
