@@ -6,8 +6,6 @@ class MyTestCase(unittest.TestCase):
     def test_river_init(self):
         self.assertRaises(ValueError, River, -1)
         self.assertRaises(ValueError, River, 0)
-        # self.assertEqual(max_qty_gap_ex(db, 'A'), res)
-        # self.assertEqual(max_qty_gap_ex(db, 'A'), res)
 
     def test_get_next_object(self):
         my_river = River(5)
@@ -28,8 +26,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(my_river.get_next_object(5), (None, -1))
         self.assertEqual(my_river.get_next_object(6), (None, -1))
 
-        del my_river
-
     def test_place_new_object(self):
         my_river = River(5)
 
@@ -44,8 +40,6 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(my_river.storage[2] == 'SS')
         my_river.place_new_object('TT', 0)
         self.assertTrue(my_river.storage[0] == 'TT')
-
-        del my_river
 
     def test_move_object(self):
         my_river = River(5)
@@ -69,8 +63,6 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(my_river.storage[4] is None)
         self.assertTrue(my_river.storage[2] == 77)
 
-        del my_river
-
     def test_release_cell(self):
         my_river = River(5)
 
@@ -83,8 +75,6 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(my_river.storage[1] is None)
         my_river.release_cell(4)
         self.assertTrue(my_river.storage[4] is None)
-
-        del my_river
 
 
 if __name__ == '__main__':

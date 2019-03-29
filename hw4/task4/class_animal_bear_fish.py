@@ -29,8 +29,10 @@ class Animal:
 
     @staticmethod
     def set_bounds(min_x, max_x):
+        if min_x < 0 or max_x < 0:
+            raise ValueError('Границы не могут быть отрицательными')
         if min_x > max_x:
-            raise ValueError('Некорректно заданы параметры')
+            raise ValueError('Левая граница не может быть больше правой')
         Animal.min_pos, Animal.max_pos = min_x, max_x
 
     @staticmethod
