@@ -1,8 +1,8 @@
 T1 = int(input('Введите T1:'))
 T2 = int(input('Введите T2:'))
 T3 = int(input('Введите T3:'))
+s_time = int(input('Введите длительность симуляции в секундах:'))
 
-s_time = 1000
 inject_cnt = 0
 
 t1, t2, t3, dt1, dt2, dt3 = 0, 0, 0, 1, 0, 0
