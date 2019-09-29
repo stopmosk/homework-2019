@@ -1,2 +1,2 @@
 # homework-2019
-Ё
+My homework for python course.
